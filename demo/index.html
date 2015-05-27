@@ -35,7 +35,7 @@
 
   <script type="text/x-handlebars" data-template-name="chat">
   <ol>
-  {{#each message in model.messages}}
+  {{#each message in model}}
   <li><strong>{{message.user}}</strong>{{message.message}}</li>
   {{else}}
   <li>Leider hat noch niemand etwas geschrieben.</li>
@@ -47,7 +47,7 @@
     Absenden
   </button>
   <p>
-    Du bist für andere als <strong>{{model.nickname}}</strong> sichtbar.
+    Du bist für andere als <strong>{{nickname}}</strong> sichtbar.
   </p>
   </script>
 

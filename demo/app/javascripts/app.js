@@ -23,35 +23,15 @@ App.ChatRoute = Ember.Route.extend({
   },
 
   model: function() {
-    return {
-      nickname: this.controllerFor('user').get('nickname'),
-      messages: [
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'David', message: 'Hallo von Salzburg!' },
-        // { user: 'Hannah', message: 'Hallo von Salzburg!' },
-        // { user: 'Johann', message: 'Hallo von Salzburg!' },
-        // { user: 'KB', message: 'Hallo von Salzburg!' }
-      ]
-    };
+    return [
+      { user: 'David', message: 'Hallo von Salzburg!' },
+      { user: 'David', message: 'Hallo von Salzburg!' }
+    ];
+  },
+
+  setupController: function(controller, model) {
+    controller.set('model', model);
+    controller.set('nickname', this.controllerFor('user').get('nickname'));
   }
 });
 
@@ -66,8 +46,8 @@ App.ChatController = Ember.Controller.extend({
         return;
       }
 
-      this.get('model.messages').pushObject({
-        user: this.get('model.nickname'),
+      this.get('model').pushObject({
+        user: this.get('nickname'),
         message: this.get('newMessage')
       });
 

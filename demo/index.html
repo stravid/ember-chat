@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Ember Chat</title>
+
+  <link rel="stylesheet" href="vendor/stylesheets/normalize.css">
+  <link rel="stylesheet" href="app/stylesheets/app.css">
+</head>
+<body>
+  <script type="text/x-handlebars" data-template-name="application">
+  <h1>Ember Chat</h1>
+  {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="index">
+  <p>
+    Willkommen beim Ember Chat, einer kleinen aber feinen JavaScript Anwendung die einen Einblick in Ember.js gibt.
+  </p>
+  <p>
+  {{link-to 'Zum Chat' 'chat'}}
+  </p>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="user">
+  <p>
+    Welchen Namen willst du im Chat verwenden?
+  </p>
+  {{input value=nickname placeholder="Nickname"}}
+  <button {{action 'joinChat'}}>
+    Chat beitreten
+  </button>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="chat">
+  <ol>
+  {{#each message in model.messages}}
+  <li><strong>{{message.user}}</strong>{{message.message}}</li>
+  {{else}}
+  <li>Leider hat noch niemand etwas geschrieben.</li>
+  {{/each}}
+  </ol>
+
+  {{input value=newMessage placeholder="Was hast du zu sagen?" action="sendMessage"}}
+  <button {{action 'sendMessage'}}>
+    Absenden
+  </button>
+  <p>
+    Du bist für andere als <strong>{{model.nickname}}</strong> sichtbar.
+  </p>
+  </script>
+
+  <script src="vendor/javascripts/jquery.js"></script>
+  <script src="vendor/javascripts/ember-template-compiler.js"></script>
+  <script src="vendor/javascripts/ember.js"></script>
+  <script src="app/javascripts/app.js"></script>
+</body>
+</html>

@@ -1,3 +1,6 @@
+var messagesEndpoint = 'http://localhost:3000/messages';
+var pushUpdatesEndpoint = 'ws://localhost:3001';
+
 App = Ember.Application.create();
 
 App.Router.map(function() {
@@ -17,7 +20,7 @@ App.UserRoute = Ember.Route.extend({
 
 App.ChatRoute = Ember.Route.extend({
   // activate: function() {
-  //   var ws = new WebSocket("ws://localhost:3001");
+  //   var ws = new WebSocket(pushUpdatesEndpoint);
 
   //   ws.onmessage = function (message) {
   //     console.log('WebSocket message:', message);
@@ -31,7 +34,7 @@ App.ChatRoute = Ember.Route.extend({
   },
 
   model: function() {
-    return Ember.$.getJSON('http://localhost:3000/messages').then(function(response) {
+    return Ember.$.getJSON(messagesEndpoint).then(function(response) {
       return response;
     });
   },
@@ -62,7 +65,7 @@ App.ChatController = Ember.Controller.extend({
 
       Ember.$.ajax({
         type: 'POST',
-        url: 'http://localhost:3000/messages',
+        url: messagesEndpoint,
         data: { message: message }
       });
 

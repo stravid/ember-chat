@@ -23,10 +23,9 @@ App.ChatRoute = Ember.Route.extend({
   },
 
   model: function() {
-    return [
-      { user: 'David', message: 'Hallo von Salzburg!' },
-      { user: 'David', message: 'Hallo von Salzburg!' }
-    ];
+    return Ember.$.getJSON('http://localhost:3000/messages').then(function(response) {
+      return response;
+    });
   },
 
   setupController: function(controller, model) {
@@ -46,9 +45,17 @@ App.ChatController = Ember.Controller.extend({
         return;
       }
 
-      this.get('model').pushObject({
+      var message = {
         user: this.get('nickname'),
         message: this.get('newMessage')
+      };
+
+      this.get('model').pushObject(message);
+
+      Ember.$.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/messages',
+        data: { message: message }
       });
 
       this.set('newMessage', '');

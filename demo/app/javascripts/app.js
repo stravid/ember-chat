@@ -16,6 +16,14 @@ App.UserRoute = Ember.Route.extend({
 });
 
 App.ChatRoute = Ember.Route.extend({
+  // activate: function() {
+  //   var ws = new WebSocket("ws://localhost:3001");
+
+  //   ws.onmessage = function (message) {
+  //     console.log('WebSocket message:', message);
+  //   }.bind(this);
+  // },
+
   beforeModel: function() {
     if (Ember.isEmpty(this.controllerFor('user').get('nickname'))) {
       this.transitionTo('user');
